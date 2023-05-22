@@ -1,43 +1,65 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchMovieDetails } from '.../service/API';
-import PropTypes from 'prop-types';
+import { useState, useEffect, useRef, Suspense } from 'react';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
+import {fetchMovieDetails} from 'service/API';
+import css from './MovieDetails.module.css';
 
 export const MovieDetails = () => {
-    const [movie, setMovie] = useState({});
     const { movieId } = useParams();
+  const [movieData, setMovieData] = useState({});
+  const { poster_path, title, vote_average, overview, genres } = movieData;
+  const location = useLocation();
+  const backLinkHref = useRef(location.state?.from ?? '/');
 
-    useEffect(() => {
-        async function getFetchMovies(movieId) {
-            try {
-                const data = await fetchMovieDetails(movieId);
-                setMovie(data);
-            } catch (error) {
-                alert('Page is not found :(');
-            };
-        }
-        getFetchMovies();
-    }, [movieId])
-    if (Object.keys(movie).length > 0) {
-        const { title, poster_path, genres, overview } = movie;
-        const movieGenres = genres.map(genre => genre.name).join(', ');
+  useEffect(() => {
+    fetchMovieDetails(movieId).then(response => setMovieData(response));
+  }, [movieId]);
 
-        return (
-            <>
-                <img src={`https://image.tmdb.org/t/p/w300${poster_path}`} alt={title} />
-                <h2>{title}</h2>
-                <h3>Overview</h3>
-                <p>{overview}</p>
-                <h3>Genres</h3>
-                <p>{movieGenres}</p>
-            </>
-        );
-    }
-};
-
-MovieDetails.propTypes = {
-  title: PropTypes.string,
-  poster_path: PropTypes.string,
-  genres: PropTypes.string,
-  overview: PropTypes.string,
+  return (
+    <>
+      <Link to={backLinkHref.current} className={css.details__backLink}>
+        Go back
+      </Link>
+      <div className={css.details__position}>
+        {poster_path && (
+          <img
+            src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+            alt={title}
+            width="400"
+          />
+        )}
+        <div className={css.details__info}>
+          <h2>{title}</h2>
+          <p>User score: {vote_average}</p>
+          <h3>Overview</h3>
+          <p>{overview}</p>
+          <h3>Genres</h3>
+          {genres && (
+            <ul>
+              {genres.map(({ name }) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+      <div>
+        <h4 className={css.details__title}>Additional information</h4>
+        <ul className={css.details__list}>
+          <li>
+            <Link to="cast" className={css.details__link}>
+              Cast
+            </Link>
+          </li>
+          <li>
+            <Link to="reviews" className={css.details__link}>
+              Rewiews
+            </Link>
+          </li>
+        </ul>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </div>
+    </>
+  );
 };

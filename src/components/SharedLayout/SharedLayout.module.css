@@ -1,0 +1,21 @@
+.layout__container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+}
+
+.layout__nav {
+    display: flex;
+    gap: 20px;
+    margin-left: 100px;
+
+}
+
+.layout__link {
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 6px;
+    text-decoration: none;
+    color: black
+}

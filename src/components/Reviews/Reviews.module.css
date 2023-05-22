@@ -1,0 +1,13 @@
+.reviews__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviews__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviews__author {
+    font-weight: 600;
+}

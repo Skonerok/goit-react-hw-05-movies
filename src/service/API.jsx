@@ -5,14 +5,14 @@ const API_KEY = 'e0ee8c9c31fb9f573eda606c9b32d207';
 
 const params = {
     params: {
-        api_key: API_KEY
+        api_key: API_KEY,
     }
 };
 
 
 export const fetchTrendingMovies = async () => {
     try {
-        const response = await axios.get(`/trending/movie/week`, params)
+        const response = await axios.get(`/trending/movie/day`, params)
         return response.data;
     } catch (error) {
         console.log(error.message);

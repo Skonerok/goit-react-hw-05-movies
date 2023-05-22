@@ -1,0 +1,48 @@
+.details__backLink {
+    display: block;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    color: grey;
+}
+
+.details__backLink:hover {
+    color:brown;
+}
+
+.details__position {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.details__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.details__title {
+    margin-left: 35px;
+}
+
+.details__list {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.details__link {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px;
+    margin-left: 30px;
+    color: grey;
+}
+
+.details__link:hover {
+    color: brown;
+}
