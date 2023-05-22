@@ -13,8 +13,8 @@ export const Reviews = () => {
 
   return (
     <ul className={css.reviews__list}>
-      {reviews.map(({ author, content }) => (
-        <li className={css.reviews__item}>
+      {reviews.map(({ id, author, content }) => (
+        <li className={css.reviews__item} key={id}>
           <p className={css.reviews__author}>Author: {author}.</p>
           <p>{content}</p>
         </li>

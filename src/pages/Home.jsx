@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchTrendingMovies } from "../service/API";
+import { fetchTrendingMovies } from 'service/API';
 import css from './Home.module.css';
 
-export const Home = () => {
+const Home = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -35,3 +35,5 @@ export const Home = () => {
     </main>
   );
 };
+
+export default Home;
