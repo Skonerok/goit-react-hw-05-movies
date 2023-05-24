@@ -52,7 +52,7 @@ export const MovieDetails = () => {
           </li>
           <li>
             <Link to="reviews" className={css.details__link}>
-              Rewiews
+              Reviews
             </Link>
           </li>
         </ul>
